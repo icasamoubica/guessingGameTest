@@ -18,8 +18,14 @@ public class GuessingGameMocking implements GuessingGameInterface {
 		numberOfGuesses++;
 		if (guess == 5)
 			return GuessResult.correct;
-		else
+		else if (guess == 4)
 			return GuessResult.tooSmall;
+		else if (guess == 3)
+			return GuessResult.tooSmallButClose;
+		else if (guess == 2)
+			return GuessResult.tooLarge;
+		else 
+			return GuessResult.tooLargeButClose;
 	}
 
 	@Override

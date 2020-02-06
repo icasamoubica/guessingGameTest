@@ -8,8 +8,8 @@ import userinterface.UI;
 
 class GuessingGameControllerTest {
 
-	UI ui;
-	GuessingGameInterface gg;
+	UserEnviromentMocking ui;
+	GuessingGameMocking gg;
 	GuessingGameController ggc;
 	
 	@BeforeEach
@@ -31,7 +31,7 @@ class GuessingGameControllerTest {
 	void testGetNumberOfGuesses() {
 		ggc = new GuessingGameController(ui, gg);
 		ggc.playGame();
-		assertEquals(5, ggc.getGuessingGame().getNumberOfGuesses()); // Ui returns int that increses after every getInt() method. 
+		assertEquals(5, gg.getNumberOfGuesses()); // Ui returns int that increses after every getInt() method. 
 		  															// the GuessingGame will return correct if ui sends 5
 		
 		
@@ -41,7 +41,7 @@ class GuessingGameControllerTest {
 	void testGameWithDao() {
 		ggc = new GuessingGameController(ui, gg, new GameResultDaoMocking());
 		ggc.playGame();
-		assertEquals(5, ggc.getGuessingGame().getNumberOfGuesses());
+		assertEquals(5, gg.getNumberOfGuesses());
 		assertTrue(ui.getString().contentEquals("end"));
 		assertTrue(ggc.getGameResults()!=null);
 	}
@@ -51,7 +51,8 @@ class GuessingGameControllerTest {
 		ggc = new GuessingGameController(ui, gg, new GameResultDaoMocking());
 		assertTrue(ggc.getGameResults().getTopTen().isEmpty());
 		ggc.playGame();
-		assertTrue(ggc.getGameResults().getTopTen().get(0)!=null);
+		assertTrue(ggc.getGameResults().getTopTen().get(0).getPlayerName().equalsIgnoreCase("no") &&
+				ggc.getGameResults().getTopTen().get(0).getNumberOfGuesses()==5);
 	}
 	
 	@Test

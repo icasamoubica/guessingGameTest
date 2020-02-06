@@ -9,7 +9,7 @@ public class GuessingGameController {
 	private GuessingGameInterface game;
 	private UI ui;
 	private GameResultDAO gameResults;
-	private String playerName;
+	private String playerName; // Player's name should be committed to db upon competition of one game, if there is dbDao
 
 	public GuessingGameController(UI ui, GuessingGameInterface game) {
 		this.ui = ui;
@@ -47,8 +47,10 @@ public class GuessingGameController {
 				gameResults.createResult(new GameResult(playerName, game.getNumberOfGuesses()));
 
 				if (!gameResults.getTopTen().isEmpty()) {
+					ui.addString("Top 10!\n");
+					int position=0;
 					for (GameResult gameResult : gameResults.getTopTen())
-						ui.addString(gameResult.getPlayerName() + ": " + gameResult.getNumberOfGuesses());
+						ui.addString(position++ + ". " + gameResult.getPlayerName() + ": " + gameResult.getNumberOfGuesses());
 				}
 			}
 
@@ -59,14 +61,6 @@ public class GuessingGameController {
 		}
 		ui.exit();
 
-	}
-
-	public GuessingGameInterface getGuessingGame() {
-		return this.game;
-	}
-
-	public UI getUi() {
-		return this.ui;
 	}
 	
 	public GameResultDAO getGameResults() {
