@@ -4,6 +4,7 @@ public class UserEnviromentMocking implements UI {
 	
 	public int guess= 0;
 	String string = "no";
+	int stringAdded=0;
 	
 	@Override
 	public String getString() {
@@ -18,7 +19,7 @@ public class UserEnviromentMocking implements UI {
 
 	@Override
 	public void addString(String s) {
-		System.out.println(s);
+		stringAdded++;
 	}
 
 	@Override
@@ -29,5 +30,8 @@ public class UserEnviromentMocking implements UI {
 		this.string = "end";
 	}
 	
+	int getStringAdded() {
+		return stringAdded;
+	}
 
 }
