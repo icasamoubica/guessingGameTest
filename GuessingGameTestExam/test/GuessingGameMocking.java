@@ -6,9 +6,11 @@ public class GuessingGameMocking implements GuessingGameInterface {
 
 	int guess = 1;
 	int numberOfGuesses;
+	private int numberOfGames = 0;
 
 	@Override
 	public void newGame() {
+		numberOfGames++;
 	}
 
 	@Override

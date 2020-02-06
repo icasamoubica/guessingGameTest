@@ -49,6 +49,7 @@ class GuessingGameControllerTest {
 	@Test
 	void testDaoCreate() {
 		ggc = new GuessingGameController(ui, gg, new GameResultDaoMocking());
+		assertTrue(ggc.getGameResults().getTopTen().isEmpty());
 		ggc.playGame();
 		assertTrue(ggc.getGameResults().getTopTen().get(0)!=null);
 	}
