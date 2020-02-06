@@ -1,20 +1,23 @@
 import userinterface.UI;
 
 public class UserEnviromentMocking implements UI {
-	
-	public int guess= 0;
+
+	public int guesses = 0;
 	String string = "no";
-	int stringAdded=0;
-	
+	int stringAdded = 0;
+
 	@Override
 	public String getString() {
-		return string;
+		if (guesses == 5)
+			return "yes";
+		else 
+			return string;
 	}
 
 	@Override
 	public int getInt() {
-		guess++;
-		return guess;
+		++guesses;
+		return guesses;
 	}
 
 	@Override
@@ -23,13 +26,14 @@ public class UserEnviromentMocking implements UI {
 	}
 
 	@Override
-	public void clear() {}
+	public void clear() {
+	}
 
 	@Override
 	public void exit() {
 		this.string = "end";
 	}
-	
+
 	int getStringAdded() {
 		return stringAdded;
 	}

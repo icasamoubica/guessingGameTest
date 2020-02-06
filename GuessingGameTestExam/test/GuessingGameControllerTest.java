@@ -33,8 +33,8 @@ class GuessingGameControllerTest {
 	void testGetNumberOfGuesses() {
 		ggc = new GuessingGameController(ui, gg);
 		ggc.playGame();
-		assertEquals(5, gg.getNumberOfGuesses()); // Ui returns int that increases after every getInt() method. 
-		  															// the GuessingGame will return correct if ui sends 5
+		assertEquals(6, gg.getNumberOfGuesses()); // Ui returns int that increases after every getInt() method. 
+		  										// the GuessingGame will return correct if ui sends 5 first game and 6 seccond one 
 		
 		
 	}
@@ -43,7 +43,7 @@ class GuessingGameControllerTest {
 	void testGameWithDao() {
 		ggc = new GuessingGameController(ui, gg, gr);
 		ggc.playGame();
-		assertEquals(5, gg.getNumberOfGuesses());
+		assertEquals(6, gg.getNumberOfGuesses());
 		assertTrue(ui.getString().contentEquals("end"));
 		assertTrue(ggc.getGameResults()!=null);
 	}
@@ -55,8 +55,8 @@ class GuessingGameControllerTest {
 		assertTrue(gr.getTopTen().isEmpty());
 		
 		ggc.playGame();
-		assertTrue(gr.getTopTen().get(0).getPlayerName().equalsIgnoreCase("no") &&
-				gr.getTopTen().get(0).getNumberOfGuesses()==5);
+		assertEquals(5, gr.getTopTen().get(0).getNumberOfGuesses());
+		assertEquals("no", gr.getTopTen().get(0).getPlayerName());
 	}
 	
 	@Test
@@ -68,8 +68,8 @@ class GuessingGameControllerTest {
 	
 	@Test 
 	void testAddStringAmmount() {
-		// Without ResultDao and with GuessingGameMocking there should be 9 calls to addString() from GameContrioller
-		int expected = 9;
+		// Without ResultDao and with GuessingGameMocking there should be 14 calls to addString() from GameContrioller
+		int expected = 14;
 		
 		ggc = new GuessingGameController(ui, gg);
 		ggc.playGame();
